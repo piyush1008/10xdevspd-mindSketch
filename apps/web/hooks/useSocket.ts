@@ -1,22 +1,39 @@
 import { useEffect, useState } from "react";
 import { WS_URL } from "../app/config";
 
-export function useSocket(){
-    const [loading,setLoading]=useState(true);
+export function useSocket(token: string | undefined){
+    const [loading, setLoading]=useState(true);
     const [socket, setSocket]=useState<WebSocket>();
 
-    //here we also need to add the token that is why the websocket connection is getting closed.
     useEffect(()=>{
-        const ws=new WebSocket(WS_URL);
-
-        ws.onopen=()=>{
+        if (!token) {
             setLoading(false);
-            setSocket(ws)
+            return;
         }
-    },[])
+
+        const ws = new WebSocket(`${WS_URL}?token=${token}`);
+
+        ws.onopen = () => {
+            setLoading(false);
+            setSocket(ws);
+        };
+
+        ws.onerror = () => {
+            setLoading(false);
+        };
+
+        ws.onclose = () => {
+            setLoading(false);
+            setSocket(undefined);
+        };
+
+        return () => {
+            ws.close();
+        };
+    }, [token]);
 
     return{
         socket,
         loading
-    }
+    };
 }

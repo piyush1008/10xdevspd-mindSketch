@@ -24,7 +24,7 @@ function checkUser(token: string): string | null {
     if (!decoded || !decoded.userId) {
       return null;
     }
-
+    console.log(JSON.stringify(decoded))
     return decoded.userId;
   } catch(e) {
     return null;
@@ -83,24 +83,58 @@ wss.on('connection', function connection(ws, request) {
       const roomId = parsedData.roomId;
       const message = parsedData.message;
 
-      //this is not good approach , the ideal approach is to use queue
-      await prismaclient.chat.create({
-        data: {
-          roomId: Number(roomId),
-          message,
-          userId
-        }
-      });
+      try {
+        // Verify user exists in database
+        // const userExists = await prismaclient.user.findUnique({
+        //   where: { id: userId }
+        // });
 
-      users.forEach(user => {
-        if (user.rooms.includes(roomId)) {
-          user.ws.send(JSON.stringify({
-            type: "chat",
-            message: message,
-            roomId
-          }))
-        }
-      })
+        // if (!userExists) {
+        //   ws.send(JSON.stringify({
+        //     type: "error",
+        //     message: "User not found"
+        //   }));
+        //   return;
+        // }
+
+        // // Verify room exists
+        // const roomExists = await prismaclient.room.findUnique({
+        //   where: { id: Number(roomId) }
+        // });
+
+        // if (!roomExists) {
+        //   ws.send(JSON.stringify({
+        //     type: "error",
+        //     message: "Room not found"
+        //   }));
+        //   return;
+        // }
+
+        //this is not good approach , the ideal approach is to use queue
+        await prismaclient.chat.create({
+          data: {
+            roomId: Number(roomId),
+            message,
+            userId
+          }
+        });
+
+        users.forEach(user => {
+          if (user.rooms.includes(roomId)) {
+            user.ws.send(JSON.stringify({
+              type: "chat",
+              message: message,
+              roomId
+            }))
+          }
+        })
+      } catch (error: any) {
+        console.error("Error creating chat:", error);
+        ws.send(JSON.stringify({
+          type: "error",
+          message: "Failed to send message"
+        }));
+      }
     }
 
   });
