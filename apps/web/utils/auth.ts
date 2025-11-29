@@ -122,8 +122,8 @@ export const authOptions={
             return token;
         },
         async session({ session, token }:any) { //this is important this is what helps you access session data in the client component.
-            console.log(session)
-            console.log(token)
+            // console.log(session)
+            // console.log(token)
             if (session.user) {
                 session.user.id = token.id as string;
                 session.user.username = token.username as string;

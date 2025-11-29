@@ -3,6 +3,8 @@
 import { useState, FormEvent } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { Label } from "@repo/ui/label";
+import { FormInput } from "@repo/ui/forminput";
 
 export default function SigninComponent() {
   const router = useRouter();
@@ -63,9 +65,7 @@ export default function SigninComponent() {
 
           <form onSubmit={handleCredentialsLogin} className="space-y-6">
             <div className="space-y-2">
-              <label className="text-sm font-medium text-white/80" htmlFor="email">
-                Email
-              </label>
+              <Label className="text-sm font-medium text-white/80" tag="email" >Email</Label>
               <div className="rounded-2xl border border-white/10 bg-slate-900/20 px-4 py-3 transition focus-within:border-white/30 focus-within:bg-slate-900/40">
                 <input
                   id="email"
@@ -76,13 +76,13 @@ export default function SigninComponent() {
                   placeholder="you@studio.com"
                   className="w-full bg-transparent text-base text-white placeholder:text-white/40 focus-visible:outline-none"
                 />
+
               </div>
             </div>
 
             <div className="space-y-2">
-              <label className="text-sm font-medium text-white/80" htmlFor="password">
-                Password
-              </label>
+                <Label className="text-sm font-medium text-white/80" tag="password" >Password</Label>
+
               <div className="rounded-2xl border border-white/10 bg-slate-900/20 px-4 py-3 transition focus-within:border-white/30 focus-within:bg-slate-900/40">
                 <input
                   id="password"

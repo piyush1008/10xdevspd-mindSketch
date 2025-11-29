@@ -2,6 +2,9 @@
 
 
 import Link from "next/link";
+import {Label} from "@repo/ui/label"
+import { FormInput } from "@repo/ui/forminput";
+
 
 export default function SignupComponent() {
   return (
@@ -29,44 +32,32 @@ export default function SignupComponent() {
 
           <form className="space-y-6">
             <div className="space-y-2">
-              <label className="text-sm font-medium text-white/80" htmlFor="name">
-                Full name
-              </label>
+              <Label className="text-sm font-medium text-white/80" tag="name">Full name</Label>
               <div className="rounded-2xl border border-white/10 bg-slate-900/20 px-4 py-3 transition focus-within:border-white/30 focus-within:bg-slate-900/40">
-                <input
-                  id="name"
-                  type="text"
-                  placeholder="Avery Lee"
-                  className="w-full bg-transparent text-base text-white placeholder:text-white/40 focus-visible:outline-none"
-                />
+          
+                <FormInput id="name" type="text" placeholder="Avery Lee" className="w-full bg-transparent text-base text-white placeholder:text-white/40 focus-visible:outline-none" />
+
               </div>
             </div>
 
             <div className="space-y-2">
-              <label className="text-sm font-medium text-white/80" htmlFor="email">
-                Email
-              </label>
+            
+              <Label className="text-sm font-medium text-white/80" tag="email">Email</Label>
+
               <div className="rounded-2xl border border-white/10 bg-slate-900/20 px-4 py-3 transition focus-within:border-white/30 focus-within:bg-slate-900/40">
-                <input
-                  id="email"
-                  type="email"
-                  placeholder="you@studio.com"
-                  className="w-full bg-transparent text-base text-white placeholder:text-white/40 focus-visible:outline-none"
-                />
+              
+                <FormInput id="email" type="email" placeholder="youstudio.com" className="w-full bg-transparent text-base text-white placeholder:text-white/40 focus-visible:outline-none" />
               </div>
             </div>
 
             <div className="space-y-2">
-              <label className="text-sm font-medium text-white/80" htmlFor="password">
-                Password
-              </label>
+           
+              <Label className="text-sm font-medium text-white/80" tag="password">Password</Label>
+
               <div className="rounded-2xl border border-white/10 bg-slate-900/20 px-4 py-3 transition focus-within:border-white/30 focus-within:bg-slate-900/40">
-                <input
-                  id="password"
-                  type="password"
-                  placeholder="••••••••••"
-                  className="w-full bg-transparent text-base text-white placeholder:text-white/40 focus-visible:outline-none"
-                />
+               
+                <FormInput id="password" type="password" placeholder="••••••••••" className="w-full bg-transparent text-base text-white placeholder:text-white/40 focus-visible:outline-none" />
+
               </div>
             </div>
 
@@ -78,20 +69,6 @@ export default function SignupComponent() {
               <span className="text-2xl transition group-hover:translate-x-1">→</span>
             </button>
           </form>
-
-          {/* <div className="grid gap-3 rounded-2xl border border-white/5 bg-white/5 p-4 text-sm text-white/70 md:grid-cols-2">
-            {[
-              "Live cursors & voice rooms",
-              "Secure team spaces",
-              "Version history snapshots",
-              "Template library access",
-            ].map((item) => (
-              <div key={item} className="flex items-center gap-2">
-                <span className="inline-block h-2 w-2 rounded-full bg-cyan-300" />
-                {item}
-              </div>
-            ))}
-          </div> */}
 
           <p className="text-center text-sm text-white/70">
             Already have an account?{" "}
