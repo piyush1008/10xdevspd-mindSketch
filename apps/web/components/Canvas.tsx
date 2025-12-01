@@ -1,10 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import { initDraw } from "../draw";
 import { IconButton } from "./IconButton";
-import { Circle, LineChart, Minus, Pencil, PenIcon, RectangleCircle, RectangleVertical, Square, Text } from "lucide-react";
+import { Circle, EllipsisIcon, LineChart, Minus, Pencil, PenIcon, RectangleCircle, RectangleVertical, Square, Text } from "lucide-react";
+import { Game } from "../draw/Game";
 
 
-type SelectShape = "square" | "rectangle" | "circle" | "line" | "text" | "pencil";
+type SelectShape = "square" | "rectangle" | "circle" | "line" | "text" | "pencil" | "ellipse";
 
 
 export default function Canvas({roomId, socket, userId}:{roomId: string, socket: WebSocket, userId:string}){
@@ -22,9 +23,11 @@ export default function Canvas({roomId, socket, userId}:{roomId: string, socket:
         
         if(canvasRef.current && selectShape)
         {
-            initDraw(canvasRef.current,roomId,socket, userId,selectShape).then(cleanup => {
-                cleanupRef.current = cleanup;
-            });
+            const g=new Game(canvasRef.current,roomId,socket,selectShape,userId);
+
+            // initDraw(canvasRef.current,roomId,socket, userId,selectShape).then(cleanup => {
+            //     cleanupRef.current = cleanup;
+            // });
             
             return () => {
                 if (cleanupRef.current) {
@@ -56,6 +59,7 @@ function TopBar({selectShape,setSelectShape}:any){
         <IconButton  activated={selectShape==="square"} icon={<Square />} onClick={()=>{setSelectShape("square")}}/>
         <IconButton  activated={selectShape==="line"} icon={<Minus />} onClick={()=>{setSelectShape("line")}}/>
         <IconButton  activated={selectShape==="pencil"} icon={<PenIcon />} onClick={()=>{setSelectShape("pencil")}}/>
+        <IconButton  activated={selectShape==="ellipse"} icon={<EllipsisIcon />} onClick={()=>{setSelectShape("ellipse")}}/>
 
 
         
