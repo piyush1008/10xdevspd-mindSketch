@@ -54,12 +54,12 @@ function TopBar({selectShape,setSelectShape}:any){
     return(
         <div className="absolute flex  top-0 items-center justify-center">
         <IconButton activated={selectShape==="rectangle"} icon={<RectangleVertical />}  onClick={()=>{setSelectShape("rectangle")}}/>
-        <IconButton activated={selectShape==="circle"} icon={<Circle />} onClick={()=>{setSelectShape("circle")}}/>
+        {/* <IconButton activated={selectShape==="circle"} icon={<Circle />} onClick={()=>{setSelectShape("circle")}}/> */}
 
         <IconButton  activated={selectShape==="square"} icon={<Square />} onClick={()=>{setSelectShape("square")}}/>
         <IconButton  activated={selectShape==="line"} icon={<Minus />} onClick={()=>{setSelectShape("line")}}/>
         <IconButton  activated={selectShape==="pencil"} icon={<PenIcon />} onClick={()=>{setSelectShape("pencil")}}/>
-        <IconButton  activated={selectShape==="ellipse"} icon={<EllipsisIcon />} onClick={()=>{setSelectShape("ellipse")}}/>
+        <IconButton  activated={selectShape==="ellipse"} icon={<Circle />} onClick={()=>{setSelectShape("ellipse")}}/>
 
 
         
