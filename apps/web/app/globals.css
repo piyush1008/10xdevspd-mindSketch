@@ -1,3 +1,14 @@
 @import "tailwindcss";
 
 @source "@repo/ui";
+
+
+
+@theme {
+    --color-primary: #FF6347; /* Tomato Red */
+    --color-secondary: #6A5ACD; /* Slate Blue */
+    --color-accent: #3CB371; /* Medium Sea Green */
+    --color-custom-gray-100: #F5F5F5;
+    --color-custom-gray-900: #212121;
+    --color-menu-gray-700: #2E2E35;
+  }
